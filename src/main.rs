@@ -2,8 +2,10 @@ mod commands;
 mod config;
 mod print;
 
-use clap::{Parser, Subcommand};
+use clap::{CommandFactory, Parser, Subcommand};
+use clap_complete::{generate, Shell};
 use colored::*;
+use std::io;
 
 #[derive(Parser)]
 #[command(
@@ -49,6 +51,11 @@ enum Commands {
         #[command(subcommand)]
         command: commands::corp::CorpCommands,
     },
+    /// Генерирует скрипт автодополнения для указанного шелла
+    Completions {
+        /// Шелл: bash, zsh, fish, elvish, powershell
+        shell: Shell,
+    },
 }
 
 fn main() {
@@ -70,5 +77,8 @@ fn main() {
         Some(Commands::Count) => commands::count::run(),
         Some(Commands::Sv { command }) => commands::sv::run(command, &cfg.sv),
         Some(Commands::Corp { command }) => commands::corp::run(command, &cfg.corp),
+        Some(Commands::Completions { shell }) => {
+            generate(shell, &mut Cli::command(), "fuck", &mut io::stdout());
+        }
     }
 }

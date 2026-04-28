@@ -51,6 +51,24 @@ fuck [КОМАНДА]
 | `fuck corp email` | Корпоративный email с максимумом buzzwords |
 | `fuck corp review` | Performance review |
 
+## Автодополнение
+
+Сгенерируй скрипт для своего шелла и подключи его:
+
+```bash
+# Bash
+fuck completions bash >> ~/.bash_completion
+
+# Zsh
+fuck completions zsh > ~/.zfunc/_fuck
+# добавь в ~/.zshrc: fpath=(~/.zfunc $fpath) && autoload -Uz compinit && compinit
+
+# Fish
+fuck completions fish > ~/.config/fish/completions/fuck.fish
+```
+
+Поддерживаются: `bash`, `zsh`, `fish`, `elvish`, `powershell`.
+
 ## Конфигурация
 
 При первом запуске создаётся файл `~/.config/fuck/config.toml` со всеми фразами по умолчанию.
