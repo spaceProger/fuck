@@ -1,0 +1,13 @@
+[package]
+name = "fuck"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+colored = "2"
+rand = "0.8"
+indicatif = "0.17"
+console = "0.15"
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
