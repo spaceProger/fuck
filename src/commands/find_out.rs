@@ -1,6 +1,5 @@
 use crate::config::FindOutConfig;
 use crate::print::{self, typewrite};
-use colored::*;
 use indicatif::{ProgressBar, ProgressStyle};
 use std::thread::sleep;
 use std::time::Duration;
