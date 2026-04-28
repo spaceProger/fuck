@@ -1,3 +1,4 @@
+use crate::print::{self, typewrite};
 use colored::*;
 use rand::seq::SliceRandom;
 
@@ -9,10 +10,10 @@ pub fn run(topics: &[String], attendees: &[String], outcomes: &[String]) {
 
     println!("{}", "📅 ПОВЕСТКА МИТИНГА".bold().blue());
     println!("{}", "─".repeat(50).dimmed());
-    println!("  {} {}", "Тема:".yellow(),                topic.white());
-    println!("  {} {}", "Участники:".cyan(),             attendee.white());
+    print!("  {} ", "Тема:".yellow());               typewrite(topic,    print::WHITE);
+    print!("  {} ", "Участники:".cyan());             typewrite(attendee, print::WHITE);
     println!("  {} 60 минут (могло быть письмом за 2 минуты)", "Длительность:".red());
-    println!("  {} {}", "Ожидаемый результат:".green(),  outcome.white());
+    print!("  {} ", "Ожидаемый результат:".green());  typewrite(outcome,  print::WHITE);
     println!("{}", "─".repeat(50).dimmed());
-    println!("{}", "⚠️  Этот митинг мог быть письмом.".yellow().bold());
+    typewrite("⚠️  Этот митинг мог быть письмом.", print::YELLOW);
 }

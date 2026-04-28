@@ -1,5 +1,6 @@
 mod commands;
 mod config;
+mod print;
 
 use clap::{Parser, Subcommand};
 use colored::*;

@@ -1,3 +1,4 @@
+use crate::print::{self, typewrite};
 use colored::*;
 use rand::seq::SliceRandom;
 
@@ -9,9 +10,9 @@ pub fn run(yesterdays: &[String], todays: &[String], blockers: &[String]) {
 
     println!("{}", "📋 STANDUP ОТЧЁТ (Silicon Valley Edition)".bold().cyan());
     println!("{}", "─".repeat(45).dimmed());
-    println!("  {} {}", "Вчера:".yellow(),   y.white());
-    println!("  {} {}", "Сегодня:".green(),  t.white());
-    println!("  {} {}", "Блокеры:".red(),    b.white());
+    print!("  {} ", "Вчера:".yellow());   typewrite(y, print::WHITE);
+    print!("  {} ", "Сегодня:".green());  typewrite(t, print::WHITE);
+    print!("  {} ", "Блокеры:".red());    typewrite(b, print::WHITE);
     println!("{}", "─".repeat(45).dimmed());
-    println!("{}", "Этот митинг мог быть письмом.".dimmed().italic());
+    typewrite("Этот митинг мог быть письмом.", print::RESET);
 }

@@ -1,4 +1,5 @@
 use crate::config::FindOutConfig;
+use crate::print::{self, typewrite};
 use colored::*;
 use indicatif::{ProgressBar, ProgressStyle};
 use std::thread::sleep;
@@ -19,10 +20,10 @@ pub fn run(cfg: &FindOutConfig) {
     }
     pb.finish_and_clear();
 
-    println!("{}", "🔍 Вы решили узнать последствия...".magenta());
-    sleep(Duration::from_millis(600));
+    typewrite("🔍 Вы решили узнать последствия...", print::MAGENTA);
+    sleep(Duration::from_millis(400));
     for line in &cfg.consequences {
-        println!("{}", line.red());
-        sleep(Duration::from_millis(400));
+        typewrite(line, print::RED);
+        sleep(Duration::from_millis(200));
     }
 }

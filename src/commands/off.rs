@@ -1,4 +1,5 @@
 use crate::config::OffConfig;
+use crate::print::{self, typewrite};
 use colored::*;
 use rand::seq::SliceRandom;
 
@@ -7,10 +8,11 @@ pub fn run(cfg: &OffConfig, rude: bool) {
     let msg = list.choose(&mut rand::thread_rng())
         .map(String::as_str).unwrap_or("иди отдохни");
 
+    print!("🚪 ");
     if rude {
-        println!("🚪 {}", msg.red());
+        typewrite(msg, print::RED);
         println!("{}", "(Шучу... или нет?)".yellow());
     } else {
-        println!("🚪 {}", msg.blue());
+        typewrite(msg, print::BLUE);
     }
 }

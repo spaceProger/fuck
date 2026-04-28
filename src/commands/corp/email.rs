@@ -1,3 +1,4 @@
+use crate::print::{self, typewrite};
 use colored::*;
 use rand::seq::SliceRandom;
 
@@ -10,13 +11,15 @@ pub fn run(subjects: &[String], greetings: &[String], bodies: &[String], closing
 
     println!("{}", "📧 КОРПОРАТИВНЫЙ EMAIL".bold().blue());
     println!("{}", "─".repeat(55).dimmed());
-    println!("  {} {}", "Тема:".yellow(), subject.white().bold());
+    print!("  {} ", "Тема:".yellow());
+    typewrite(subject, print::BOLD);
     println!();
-    println!("  {}", greeting.cyan());
+    typewrite(&format!("  {}", greeting), print::CYAN);
     println!();
-    println!("  {}", body.white());
+    print!("  ");
+    typewrite(body, print::WHITE);
     println!();
-    println!("  {}", closing.cyan());
+    typewrite(&format!("  {}", closing), print::CYAN);
     println!("  {}", "Менеджер Менеджеров, Senior VP of Synergy".dimmed());
     println!("{}", "─".repeat(55).dimmed());
 }

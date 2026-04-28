@@ -1,3 +1,4 @@
+use crate::print::{self, typewrite};
 use colored::*;
 use indicatif::{ProgressBar, ProgressStyle};
 use rand::seq::SliceRandom;
@@ -20,28 +21,24 @@ pub fn run(strengths: &[String], improvements: &[String]) {
     pb.finish_and_clear();
 
     let ratings = [
-        ("⭐⭐⭐⭐⭐", "Превышает ожидания",      "green"),
-        ("⭐⭐⭐⭐",   "Соответствует ожиданиям", "yellow"),
-        ("⭐⭐⭐",     "Частично соответствует",  "yellow"),
-        ("⭐⭐",       "Требует улучшения",        "red"),
+        ("⭐⭐⭐⭐⭐", "Превышает ожидания",      print::GREEN),
+        ("⭐⭐⭐⭐",   "Соответствует ожиданиям", print::YELLOW),
+        ("⭐⭐⭐",     "Частично соответствует",  print::YELLOW),
+        ("⭐⭐",       "Требует улучшения",        print::RED),
     ];
     let mut rng = rand::thread_rng();
     let (stars, label, color) = ratings.choose(&mut rng).unwrap();
-    let strength   = strengths.choose(&mut rng).map(String::as_str).unwrap_or("существует");
+    let strength    = strengths.choose(&mut rng).map(String::as_str).unwrap_or("существует");
     let improvement = improvements.choose(&mut rng).map(String::as_str).unwrap_or("всё остальное");
-
-    let rating_str = format!("{} — {}", stars, label);
-    let colored_rating = match *color {
-        "green" => rating_str.green().bold().to_string(),
-        "red"   => rating_str.red().bold().to_string(),
-        _       => rating_str.yellow().bold().to_string(),
-    };
 
     println!("{}", "📊 PERFORMANCE REVIEW".bold().blue());
     println!("{}", "─".repeat(50).dimmed());
-    println!("  {} {}", "Оценка:".white(),          colored_rating);
-    println!("  {} {}", "Сильные стороны:".green(), strength.white());
-    println!("  {} {}", "Зоны роста:".yellow(),     improvement.white());
+    print!("  {} ", "Оценка:".white());
+    typewrite(&format!("{} — {}", stars, label), color);
+    print!("  {} ", "Сильные стороны:".green());
+    typewrite(strength, print::WHITE);
+    print!("  {} ", "Зоны роста:".yellow());
+    typewrite(improvement, print::WHITE);
     println!("{}", "─".repeat(50).dimmed());
-    println!("{}", "Повышение зарплаты: 0%. Зато грамота.".red());
+    typewrite("Повышение зарплаты: 0%. Зато грамота.", print::RED);
 }

@@ -1,3 +1,4 @@
+use crate::print::{self, typewrite};
 use colored::*;
 use rand::seq::SliceRandom;
 
@@ -9,7 +10,8 @@ pub fn run(openers: &[String], middles: &[String], claims: &[String]) {
 
     println!("{}", "🧔 МОНОЛОГ ЭРЛИХА БЭКМАНА".bold().yellow());
     println!("{}", "─".repeat(50).dimmed());
-    println!("  \"{} {}, {}\"", opener, middle, claim);
+    print!("  ");
+    typewrite(&format!("\"{}  {}, {}\"", opener, middle, claim), print::WHITE);
     println!("{}", "─".repeat(50).dimmed());
     println!("{}", "— Erlich Bachman, CEO of Aviato™".cyan());
 }
